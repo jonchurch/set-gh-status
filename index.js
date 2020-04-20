@@ -25,17 +25,26 @@ const changeStatus = `mutation changeUserStatus ($input: ChangeUserStatusInput!)
   }
 }`;
 
-async function setStatus() {
+const DEFAULT_TEMPLATE = '{#} notifications pending';
+
+function interpolateMessage(message, numNotifications) {
+  const reg = /{#}/;
+  return message.replace(reg, numNotifications);
+}
+
+async function setStatus(messageTemplate) {
   const notifications = await rest.paginate('GET /notifications');
-  const message = `${notifications.length} notifications pending.`;
-  const statusOpts = {
-    message,
-    emoji: ':bellhop_bell:',
-    // expiresAt: '',
-    // limitedAvailability: false
-  };
+
+  const message = interpolateMessage(
+    messageTemplate || DEFAULT_TEMPLATE,
+    notifications.length
+  );
+
   await graphqlWithAuth(changeStatus, {
-    input: statusOpts,
+    input: {
+      message,
+      emoji: ':bellhop_bell:',
+    },
   });
 
   console.log(`Message set: "${message}"`);
