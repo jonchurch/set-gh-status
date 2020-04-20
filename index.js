@@ -47,7 +47,9 @@ async function setStatus(messageTemplate) {
     },
   });
 
-  console.log(`Message set: "${message}"`);
+  console.log(`Status set: "${message}"`);
 }
 
 setStatus().catch(console.error);
+
+module.exports.setStatus = setStatus;

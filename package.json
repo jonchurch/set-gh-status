@@ -1,12 +1,15 @@
 {
   "name": "set-github-status",
   "version": "1.0.0",
-  "description": "",
+  "description": "Set your Github user status",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "bin": {
+    "gh-status": "bin/cli.js"
+  },
+  "keywords": ["github", "github user status", "status"],
   "author": "",
   "license": "ISC",
   "dependencies": {
