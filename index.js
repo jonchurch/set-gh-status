@@ -1,13 +1,17 @@
 const { Octokit } = require('@octokit/rest');
 const { graphql } = require('@octokit/graphql');
-require('dotenv').config();
+const { GH_TOKEN } = require('./config');
+
+if (!GH_TOKEN) {
+  throw new Error('GH_TOKEN required!');
+}
 
 const rest = new Octokit({
-  auth: process.env.GH_TOKEN,
+  auth: GH_TOKEN,
 });
 const graphqlWithAuth = graphql.defaults({
   headers: {
-    authorization: `token ${process.env.GH_TOKEN}`,
+    authorization: `token ${GH_TOKEN}`,
   },
 });
 
@@ -21,11 +25,11 @@ const changeStatus = `mutation changeUserStatus ($input: ChangeUserStatusInput!)
   }
 }`;
 
-async function run() {
+async function setStatus() {
   const notifications = await rest.paginate('GET /notifications');
-
+  const message = `${notifications.length} notifications pending.`;
   const statusOpts = {
-    message: `${notifications.length} notifications pending.`,
+    message,
     emoji: ':bellhop_bell:',
     // expiresAt: '',
     // limitedAvailability: false
@@ -33,6 +37,8 @@ async function run() {
   await graphqlWithAuth(changeStatus, {
     input: statusOpts,
   });
+
+  console.log(`Message set: "${message}"`);
 }
 
-run().catch(console.log);
+setStatus().catch(console.error);
