@@ -8,10 +8,10 @@ Set your [Github User Status](https://help.github.com/en/github/setting-up-and-m
 
 **Requires a Gitub Personal Access Token with the `user` scope. Go [here to create one](https://github.com/settings/tokens).**
 
-You can either export your token as an environment variable `GH_STATUS_TOKEN`, or pass it as an option:
+You can either export your token as an environment variable `SET_STATUS_TOKEN`, or pass it as an option:
 
 ```sh
-export GH_STATUS_TOKEN=<your_token>
+export SET_STATUS_TOKEN=<your_token>
 
 set-gh-status -t <your_token> -m "Shoveling code"
 ```
