@@ -6,7 +6,7 @@ Set your [Github User Status](https://help.github.com/en/github/setting-up-and-m
 
 ## Usage
 
-**Requires a Gitub Personal Access Token with the `user` scope. Go [here to create one].**
+**Requires a Gitub Personal Access Token with the `user` scope. Go [here to create one](https://github.com/settings/tokens).**
 
 You can either export your token as an environment variable `GH_STATUS_TOKEN`, or pass it as an option:
 
