@@ -1,12 +1,27 @@
 #!/usr/bin/env node
 const { argv } = require('yargs')
-  .example("$0 -m 'Celebrating' -e tada")
-  .alias('m', 'message')
-  .alias('e', 'emoji')
+  .example("$0 -m 'Celebrating' -e :tada:")
+  .alias('v', 'version')
+  .option('m', {
+    alias: 'message',
+    describe: 'status message to set',
+  })
+  .option('e', {
+    alias: 'emoji',
+    describe: 'status emoji, in unicode or :emoji: form',
+  })
   // .alias('x', 'expires')
-  .alias('b', 'busy')
-  .alias('t', 'token')
-  .boolean(['b']);
+  .option('b', {
+    alias: 'busy',
+    type: 'boolean',
+    describe: 'indicate if busy',
+  })
+  .option('t', {
+    alias: 'token',
+    describe: 'Github personal access token, requires user scopes',
+  })
+  .alias('h', 'help')
+  .help('h');
 
 const config = require('../config');
 
