@@ -9,12 +9,17 @@
   "bin": {
     "gh-status": "bin/cli.js"
   },
-  "keywords": ["github", "github user status", "status"],
+  "keywords": [
+    "github",
+    "github user status",
+    "status"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@octokit/graphql": "^4.3.1",
     "@octokit/rest": "^17.2.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "yargs": "^15.3.1"
   }
 }
