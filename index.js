@@ -32,22 +32,32 @@ function interpolateMessage(message, numNotifications) {
   return message.replace(reg, numNotifications);
 }
 
-async function setStatus(messageTemplate) {
-  const notifications = await rest.paginate('GET /notifications');
+async function setStatus({ message, emoji, limitedAvailability, expiresAt }) {
+  try {
+    // this request is only necessary if you're using the {#} template
+    const notifications = await rest.paginate('GET /notifications');
 
-  const message = interpolateMessage(
-    messageTemplate || DEFAULT_TEMPLATE,
-    notifications.length
-  );
+    const _message = interpolateMessage(
+      message || DEFAULT_TEMPLATE,
+      notifications.length
+    );
 
-  await graphqlWithAuth(changeStatus, {
-    input: {
-      message,
-      emoji: ':bellhop_bell:',
-    },
-  });
+    await graphqlWithAuth(changeStatus, {
+      input: {
+        message: _message,
+        emoji,
+        limitedAvailability,
+      },
+    });
 
-  console.log(`Message set: "${message}"`);
+    console.log(`Status set: "${_message}"`);
+  } catch (err) {
+    if (err.status && err.status === 401) {
+      console.error('Could not set status, bad credentials');
+    } else {
+      console.log('Could not set status');
+    }
+  }
 }
 
-setStatus().catch(console.error);
+module.exports.setStatus = setStatus;
