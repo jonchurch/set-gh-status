@@ -8,13 +8,13 @@ const { argv } = require('yargs')
   .alias('t', 'token')
   .boolean(['b']);
 
-const config = require('./config');
+const config = require('../config');
 
 if (argv.t) {
   config.GH_TOKEN = argv.t;
 }
 
-const { setStatus } = require('./index.js');
+const { setStatus } = require('../index.js');
 
 setStatus({
   message: argv.m,
