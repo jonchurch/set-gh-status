@@ -1,5 +1,5 @@
 require('dotenv').config();
 
 module.exports = {
-  GH_TOKEN: process.env.SET_STATUS_TOKEN,
+  SET_STATUS_TOKEN: process.env.SET_STATUS_TOKEN,
 };

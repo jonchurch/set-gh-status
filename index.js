@@ -1,17 +1,17 @@
 const { Octokit } = require('@octokit/rest');
 const { graphql } = require('@octokit/graphql');
-const { GH_TOKEN } = require('./config');
+const { SET_STATUS_TOKEN } = require('./config');
 
-if (!GH_TOKEN) {
-  throw new Error('GH_TOKEN required!');
+if (!SET_STATUS_TOKEN) {
+  throw new Error('Token must be provided!');
 }
 
 const rest = new Octokit({
-  auth: GH_TOKEN,
+  auth: SET_STATUS_TOKEN,
 });
 const graphqlWithAuth = graphql.defaults({
   headers: {
-    authorization: `token ${GH_TOKEN}`,
+    authorization: `token ${SET_STATUS_TOKEN}`,
   },
 });
 
