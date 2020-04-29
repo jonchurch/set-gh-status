@@ -10,7 +10,7 @@ Set your [Github User Status](https://help.github.com/en/github/setting-up-and-m
 
 You can either export your token as an environment variable `SET_STATUS_TOKEN`, or pass it as an option:
 
-```sh
+```
 export SET_STATUS_TOKEN=<your_token>
 
 set-gh-status -t <your_token> -m "Shoveling code"
@@ -18,7 +18,7 @@ set-gh-status -t <your_token> -m "Shoveling code"
 
 To use `set-gh-status`, either install it globally from npm, or run it with `npx`:
 
-```shell
+```
 npx set-gh-status -t <your_token> -m "Squashing bugs and giving hugs" -e ❤️
 
 npm i -g set-gh-status
@@ -28,7 +28,7 @@ npm i -g set-gh-status
 
 To see all options run `set-gh-status --help`.
 
-```sh
+```
 npx set-gh-status --help
 
 Options:
